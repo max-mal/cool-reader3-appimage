@@ -1,0 +1,44 @@
+# appimage-builder recipe see https://appimage-builder.readthedocs.io for details
+version: 1
+AppDir:
+  app_info:
+    id: cr3
+    name: CoolReader3
+    icon: cr3
+    version: latest
+    exec: usr/bin/cr3
+  apt:
+    arch:
+    - amd64
+    allow_unauthenticated: true
+    sources:
+    - sourceline: deb http://archive.ubuntu.com/ubuntu/ xenial main universe restricted
+    include:
+    - libc6:amd64
+    - zlib1g:amd64
+    - libpng12-0:amd64
+    - libjpeg62:amd64
+    - libfreetype6:amd64
+    - libfontconfig1:amd64
+    - libqtcore4:amd64
+    - libqtgui4:amd64
+    - libgcc1:amd64
+    - libstdc++6:amd64
+  files:
+    include:
+    - usr/bin/cr3
+    exclude:
+    - usr/share/man
+    - usr/share/doc/*/README.*
+    - usr/share/doc/*/changelog.*
+    - usr/share/doc/*/NEWS.*
+    - usr/share/doc/*/TODO.*
+  runtime:
+    path_mappings:
+      - /usr/share/cr3:$APPDIR/usr/share/cr3
+
+AppImage:
+  update-information: None
+  sign-key: None
+  arch: x86_64
+
